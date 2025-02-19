@@ -35,8 +35,8 @@ hamer = HAMER(device="cpu")
 
 ## Things are always a bit complicated
 
-I tried with GitHub LFS but its still too big for my free tier... so I must resort to Google Drive (as everyone else does)
-The file is [here](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing)
+I tried with GitHub LFS but its still too big for my free tier... so I must resort to Google Drive (as everyone else does).
+The file is [here](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing).
 It is called `hamer.ckpt` and must be placed into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/hamer.ckpt`.
 
 ~~As I am only using GitHub Free the file size can only be 2 GB per file, so I had to split it into multiple files. It maybe necessary to install git-lfs to be able to pull the files.~~

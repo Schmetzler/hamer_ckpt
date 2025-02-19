@@ -39,9 +39,8 @@ I tried with GitHub LFS but its still too big for my free tier... so I must reso
 The file is [here](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing)
 It is called `hamer.ckpt` and must be placed into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/hamer.ckpt`.
 
-~~As I am only using GitHub Free the file size can only be 2 GB per file, so I had to split it into multiple files. It maybe necessary to install git-lfs to be able to pull the files.
+~~As I am only using GitHub Free the file size can only be 2 GB per file, so I had to split it into multiple files. It maybe necessary to install git-lfs to be able to pull the files.~~
 
-So to use it just extract hamer.7z.001 (and obviously with hamer.7z.002) into the hamer_ckpts folder. It should extract to hamer.ckpt. You can remove the 7z files afterwards.
+~~So to use it just extract hamer.7z.001 (and obviously with hamer.7z.002) into the hamer_ckpts folder. It should extract to hamer.ckpt. You can remove the 7z files afterwards.~~
 
-I don't want to use the google drive stuff, as I want the file to be available more consistently.
-And of course you would need 7zip to extract the file... have fun.~~
+~~I don't want to use the google drive stuff, as I want the file to be available more consistently. And of course you would need 7zip to extract the file... have fun.~~

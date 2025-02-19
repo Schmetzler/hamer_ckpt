@@ -1,7 +1,15 @@
-# hamer_ckpt
-The ~~checkpoint~~ config file for HaMeR ~~(which is 2.6GB in size !!!)~~.
+## TL;DR
+* Clone Repository
+* Download [Keypoint File](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing)
+* Put `hamer.ckpt` into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/`
+* Register and download MANO files [here](https://mano.is.tue.mpg.de/)
+* Put the data from `mano_v1_2.zip` into `<PATH_TO_REPOSITORY>/_DATA/data`
+* Use it with [hamer_keypoints](https://github.com/Schmetzler/hamer_keypoints.git)
 
-This repository contains just the HaMeR ~~Checkpoint file and~~ config for HaMeR to use with [hamer_keypoint](https://github.com/Schmetzler/hamer_keypoint.git). It is the CPU version of the model so it should be able to load, even if the GPU has less memory. I had to load it in a CPU only torch environment and save it again. I think it can be transferred to the GPU after loading.
+# hamer_ckpt
+The ~~checkpoint~~ config file for HaMeR.
+
+This repository contains just the HaMeR ~~Checkpoint file and~~ config for HaMeR to use with [hamer_keypoints](https://github.com/Schmetzler/hamer_keypoints.git). It is the CPU version of the model so it should be able to load, even if the GPU has less memory. I had to load it in a CPU only torch environment and save it again. I think it can be transferred to the GPU after loading.
 
 The original file was downloaded from https://www.cs.utexas.edu/~pavlakos/hamer/data/hamer_demo_data.tar.gz as in the original implementation of [HaMeR](https://github.com/geopavlakos/hamer.git) which also contains a model for VitPos, which is not needed for hamer_keypoint.
 
@@ -17,7 +25,7 @@ trainer.strategy._lightning_module = hamer.model
 trainer.save_checkpoint("hamer.ckpt")
 ```
 
-You should put the MANO files under the data folder see the README.md of the data folder.
+You should put the [MANO](https://mano.is.tue.mpg.de/) files under the data folder see the README.md of the data folder.
 
 Clone the repository and set the path in hamer_keypoints like following:
 

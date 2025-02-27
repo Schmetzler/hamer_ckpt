@@ -1,7 +1,7 @@
 ## TL;DR
 * Clone Repository
-* Download [Keypoint File](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing)
-* Put `hamer.ckpt` into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/`
+* Download a [Keypoint File](https://drive.google.com/drive/folders/1hfLQhse5DP460Q-j0d-vG_obCVIsc9Bt?usp=sharing) (and if you want rename it to `hamer.safetensors`)
+* Put `hamer.safetensors` into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/`
 * Register and download MANO files [here](https://mano.is.tue.mpg.de/)
 * Put the data from `mano_v1_2.zip` into `<PATH_TO_REPOSITORY>/_DATA/data`
 * Use it with [hamer_keypoints](https://github.com/Schmetzler/hamer_keypoints.git)
@@ -9,21 +9,14 @@
 # hamer_ckpt
 The ~~checkpoint~~ config file for HaMeR.
 
-This repository contains just the HaMeR ~~Checkpoint file and~~ config for HaMeR to use with [hamer_keypoints](https://github.com/Schmetzler/hamer_keypoints.git). It is the CPU version of the model so it should be able to load, even if the GPU has less memory. I had to load it in a CPU only torch environment and save it again. I think it can be transferred to the GPU after loading.
+This repository contains just the HaMeR ~~Checkpoint file and~~ config for HaMeR to use with [hamer_keypoints](https://github.com/Schmetzler/hamer_keypoints.git). 
+I use [safetensors](https://github.com/huggingface/safetensors) to store the model weights. I extracted 3 Versions out of the original:
 
-The original file was downloaded from https://www.cs.utexas.edu/~pavlakos/hamer/data/hamer_demo_data.tar.gz as in the original implementation of [HaMeR](https://github.com/geopavlakos/hamer.git) which also contains a model for VitPos, which is not needed for hamer_keypoint.
+* **hamer.safetensors** The original float32 weights with just the discriminator thing removed (2.5GB)
+* **hamer16.safetensors** The weights in bfloat16 format (but will be loaded as float32 so no speed improvement) (1.2GB)
+* **hamer8.safetensors** The weights in float8_e4m3fn format (but will be loaded as float32 so no speed improvement) (0.6GB)
 
-Just for reference I converted it this way:
-
-```python
-from lightning import Trainer
-trainer = Trainer(enable_checkpointing = False)
-from hamer.hamer_module import HAMER
-# be aware you have to use a CPU only torch environment when using the original ckpt file
-hamer = HAMER(device="cpu")
-trainer.strategy._lightning_module = hamer.model
-trainer.save_checkpoint("hamer.ckpt")
-```
+The original file was downloaded from https://www.cs.utexas.edu/~pavlakos/hamer/data/hamer_demo_data.tar.gz as in the original implementation of [HaMeR](https://github.com/geopavlakos/hamer.git) which also contains a model for VitPos, which is not needed for hamer_keypoint. I had to load the model and store it again as safetensors.
 
 You should put the [MANO](https://mano.is.tue.mpg.de/) files under the data folder see the README.md of the data folder.
 
@@ -38,14 +31,21 @@ from hamer.hamer_module import HAMER
 hamer = HAMER(device="cpu")
 #hamer = HAMER(device="cuda")
 
+# you can also load a different CHECKPOINT_FILE
+# but it must have the 'model_config.yaml' 2 folders above
+hamer = HAMER(device="cpu", checkpoint_path=f"{CACHE_DIR_HAMER}/hamer_ckpts/checkpoints/hamer8.safetensors")
+
 # ... do stuff ... 
 ```
 
 ## Things are always a bit complicated
 
 I tried with GitHub LFS but its still too big for my free tier... so I must resort to Google Drive (as everyone else does).
-The file is [here](https://drive.google.com/file/d/1Hnl04nIlRUhnJsKEKcHQY0qBqXhzpmgS/view?usp=sharing).
-It is called `hamer.ckpt` and must be placed into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/hamer.ckpt`.
+
+If my google drive space gets a little short I may remove the big file as you can resort to the [original file](https://www.cs.utexas.edu/~pavlakos/hamer/data/hamer_demo_data.tar.gz).
+
+Load one file from [here](https://drive.google.com/drive/folders/1hfLQhse5DP460Q-j0d-vG_obCVIsc9Bt?usp=sharing).
+Rename it and place it into `<PATH_TO_REPOSITORY>/_DATA/hamer_ckpts/checkpoints/hamer.safetensors`.
 
 ~~As I am only using GitHub Free the file size can only be 2 GB per file, so I had to split it into multiple files. It maybe necessary to install git-lfs to be able to pull the files.~~
 

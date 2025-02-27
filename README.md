@@ -23,8 +23,8 @@ You should put the [MANO](https://mano.is.tue.mpg.de/) files under the data fold
 Clone the repository and set the path in hamer_keypoints like following:
 
 ```python
-import hamer.configs
-hamer.configs.CACHE_DIR_HAMER = "<PATH_TO_REPOSITORY>/_DATA"
+import hamer.configs as hcfg
+hcfg.CACHE_DIR_HAMER = "<PATH_TO_REPOSITORY>/_DATA"
 from hamer.hamer_module import HAMER
 
 # choose depending on your torch configuration
@@ -33,7 +33,7 @@ hamer = HAMER(device="cpu")
 
 # you can also load a different CHECKPOINT_FILE
 # but it must have the 'model_config.yaml' 2 folders above
-hamer = HAMER(device="cpu", checkpoint_path=f"{CACHE_DIR_HAMER}/hamer_ckpts/checkpoints/hamer8.safetensors")
+hamer = HAMER(device="cpu", checkpoint_path=f"{hcfg.CACHE_DIR_HAMER}/hamer_ckpts/checkpoints/hamer8.safetensors")
 
 # ... do stuff ... 
 ```
